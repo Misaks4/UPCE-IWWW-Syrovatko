@@ -1,0 +1,15 @@
+body {
+    #font-family: Verdana, sans-serif;
+}
+hr {
+    margin-left: -50px;
+}
+.text {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.nadpis{
+ margin-top: 50px;
+}
