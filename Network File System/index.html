@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Síťové souborové systémy – NFS, Michal Syrovátko</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Síťové souborové systémy – NFS</h1>
+        <h3>Michal Syrovátko, <a href="mailto:st58293@student.upce.cz">st58293@student.upce.cz</a></h3>
+        <h4>21. 10. 2020</h4>
+    </header>
+    <hr>
+    <h2>Obsah</h2>
+    <ol>
+        <li><a href="#uvod">Úvod</a></li>
+        <li><a href="#historie">Historie</a></li>
+        <li><a href="#3a4">Verze protokolu&nbsp;3 a&nbsp;4</a></li>
+        <li><a href="#kernel_user">Kernel a&nbsp;user</a></li>
+        <li><a href="#zabezpeceni">Zabezpečení a&nbsp;rizika</a></li>
+        <li><a href="#export">Vybranné export parametry</a></li>
+        <li><a href="#exportfs">Exportfs</a></li>
+        <li><a href="#instalace">Instalace na ubuntu&nbsp;20.04.1&nbsp;LTS</a></li>
+        <li><a href="#zaver">Závěr</a></li>
+        <li><a href="#zdroje">Zdroje</a></li>
+    </ol>
+
+    <hr>
+    <h2 id="uvod">Úvod</h2>
+    <p>Síťový souborový systém neboli Network File System (dále jen „NFS“) je síťový protokol pro přenos souborů po sítí. Na unixových operačních systémech se jedná o&nbsp;nejrozšířenější síťový souborový systém.</p>
+    <p>NFS je implementován síťovou architekturou klient-server. Server spravuje autentizaci, autorizaci a&nbsp;správu klientů a&nbsp;sdílení dat. Po autorizaci mají klienti přístup k&nbsp;datům po sítí jako kdyby přistupovali k&nbsp;lokální diskové jednotce.</p>
+    <p>NFS funguje v&nbsp;IPV4 a IPV6 sítích. K&nbsp;přístupu a&nbsp;doručování dat používá TPC nebo UDP, záleží na používané verzi NFS. </p>
+    <div class="citace">
+        <a href="#jedna">[1]</a>,
+        <a href="#dva">[2]</a>
+    </div>
+    <hr>
+    <h2 id="historie">Historie</h2>
+    <p>NFS byl prvním síťovým souborovým systémem využívající IP protokol. První verze byla vyvinuta firmou Sun Microsystems (nyní Oracle Corporation) v&nbsp;začátcích 80.&nbsp;let 20.&nbsp;století. Po úspěchu první verze byla v&nbsp;roce 1989 veřejně vydána NFSv2 s&nbsp;dokumentací Request for Comments (dále jen „RFC“) a&nbsp;uznána za standard.</p>
+    <p>Vývoj standardu NFS pokračoval v&nbsp;roce 1995 vyšla verze 3 RFC&nbsp;1813. Další velká aktualizace NFSv4 RFC&nbsp;3530 v&nbsp;roce 2003. NFSv4.1 byla vydána v&nbsp;roce 2010. Současná verze NFSv4.1 je RFC&nbsp;8881 a&nbsp;byla vydána v&nbsp;srpnu 2020.<sup><a href="#devet">[9]</a></sup></p>
+    <div class="citace">
+        <a href="#jedna">[1]</a>,
+        <a href="#tri">[3]</a>
+    </div>
+
+    <hr>
+    <h2 id="3a4">Verze protokolu&nbsp;3 a&nbsp;4</h2>
+    <p>Oproti předchozí verzi NFSv3 přinesla přechod na 64bitové adresování souborů, zrušení omezení maximální velikosti souborů 2&nbsp;GB a&nbsp;asynchronní zapisování dat. Ke komunikaci mezi klientem a&nbsp;server používá bezstavový protokol UDP, průběh komunikace se neověřuje.</p>
+    <p>NFSv4, ale používá stavový protokol TCP, vytvoří se spojení a&nbsp;v&nbsp;případě chyby se přepošle pouze poslední frame. Přináší bezpečnostní vylepšení, například podporu Kerberos, a&nbsp;podporuje ACL.</p>
+    <p>Poslední verze&nbsp;4.1 přidává podporu pNFS, protokolu pro paralelní přístup.</p>
+    <div class="citace">
+        <a href="#ctyry">[4]</a>,
+        <a href="#pet">[5]</a>
+    </div>
+
+    <hr>
+    <h2 id="kernel_user">Kernel a&nbsp;user</h2>
+    <p>Programy v&nbsp;kernel režimu mají kompletní a&nbsp;neomezený přístup k&nbsp;hardwaru. Může provádět instrukci CPU a&nbsp;odkazovat na libovolnou adresu paměti. Režim jádra je vyhrazen pro nejspolehlivější funkce operačního systému na nejnižší úrovni. Pády v&nbsp;režimu jádra zastaví celý počítač. Výhodou je rychlost provedení operací.</p>
+    <p>Kód spuštěný v&nbsp;uživatelském režimu musí delegovat na systémová rozhraní API, aby získal přístup k&nbsp;hardwaru nebo paměti. Havárie v&nbsp;uživatelském režimu jsou vždy obnovitelné.</p>
+
+    <p>Od kernelu&nbsp;2.2 je experimentální podpora kernelu NFS serveru umožňující nárůst v&nbsp;rychlosti NFS serveru.<sup><a href="#sest">[6]</a></sup>
+        NFS přes UDP a&nbsp;TCP na IPv4 jsou oficiálně podporovány od verze kernelu&nbsp;2.4.<sup><a href="#pet">[5]</a></sup>
+        V&nbsp;dnešní době standardně NFS server běží v&nbsp;režimu kernel a&nbsp;klient v&nbsp; režimu user, ale například <a href="https://github.com/nfs-ganesha/nfs-ganesha/wiki">NFS-Ganesha</a> je open source projekt, který implementuje NFS server v&nbsp;režimu user.</p>
+    <div class="citace">
+        <a href="#sedm">[7]</a>
+    </div>
+
+    <hr>
+    <h2 id="zabezpeceni">Zabezpečení a&nbsp;rizika</h2>
+    <p>NFSv4 se zaměřuje na bezpečnost, ta u&nbsp;hlavně starších verzí je velkým problémem, mezi typické rizika patří:</p>
+    <ol>
+        <li>Server NFS se při ověřování klientů spoléhá na IP adresu, takže je zranitelný vůči padělání IP adresy.</li>
+        <li>Server NFS při ověřování uživatele spoléhá na počítač klienta. Zranitelný vůči už napadeným klientům.</li>
+        <li>Server při každé žádosti neověřuje klientovu autentifikaci. Útočník s&nbsp;falešným nebo odchyceným popisovačem souborů může přistupovat k&nbsp;souborovému systému stejně snadno jako legitimní klient.</li>
+    </ol>
+    <p>Typicky je NFS potřeba kombinovat s&nbsp;dalšími bezpečnostními řešeními. Například bezpečnostní riziko autentizace se od verze&nbsp;4 řeší použitím Kerberos.</p>
+    <div class="citace">
+        <a href="#jedna">[1]</a>,
+        <a href="#osm">[8]</a>,
+        <a href="#devet">[9]</a>
+    </div>
+
+    <hr>
+    <h2 id="export">Vybranné export parametry</h2>
+    <ul>
+        <li>[ro] Přístup pouze ke čtení.</li>
+        <li>[rw] Přístup ke čtení i&nbsp;zápisu.</li>
+        <li>[root_squash] Mapuje žádosti z uid a&nbsp;gid 0 na anonymní.</li>
+        <li>[no_root_squash] Vypne root squashing. Tato možnost je užitečná pro klienty bez disků.</li>
+        <li>[all_squash] Mapuje všechny uid a&nbsp;gid do anonymního uživatele. Užitečné pro veřejné adresáře FTP exportované z&nbsp;NFS. </li>
+        <li>[sync] Server odpovídá na požadavky až potom, co byly změny potvrzeny ve úložišti. </li>
+        <li>[async] Server začne odpovídat na požadavky dříve, než dojde k&nbsp;provedéní změn.</li>
+        <li>[nohide] Souborový systém nebude skrytý.</li>
+        <li>[no_subtree_check] Zruší kontrolování subtree. Mírně sníží zabezpečení, ale může zlepšit spolehlivost.</li>
+    </ul>
+    <p> Více lze nalést na:&nbsp;<a href="https://linux.die.net/man/5/exports">https://linux.die.net/man/5/exports</a>.</p>
+    <div class="citace">
+        <a href="#deset">[10]</a>
+    </div>
+
+    <hr>
+    <h2 id="exportfs">Exportfs</h2>
+    <p>Je nástroj pro jednodušší správu exportovaní adresáře klientům NFS.</p>
+    <h3>Vybranné parametry</h3>
+    <ul>
+        <li>[-a] Exportuje nebo zruší export ze všech adresářů.</li>
+        <li>[-o] Nastaví seznam možností exportu.</li>
+        <li>[-u] Zruší export jednoho nebo více adresářů.</li>
+    </ul>
+    <p> Více lze nalést na:&nbsp;<a href="https://linux.die.net/man/8/exportfs">https://linux.die.net/man/8/exportfs</a>.</p>
+    <div class="citace">
+        <a href="#jedenact">[11]</a>
+    </div>
+
+    <hr>
+    <h2 id="instalace">Praktická ukázka na Ubuntu&nbsp;20.04.1&nbsp;LTS</h2>
+    <p>V&nbsp;praktické ukázce si úkážeme jednoduché nakonfigurování a&nbsp;použití NFS serveru a&nbsp;klienta. Pro svoji ukázku jsem zvolil linuxovou distribuci Ubuntu. Ke stažení na:&nbsp;<a href="https://releases.ubuntu.com/20.04/">https://releases.ubuntu.com/20.04/</a>.</p>
+
+    <h3>Instalace na server</h3>
+    <ol>
+        <li>Nainstalujeme NFS kernel server.
+            <code>$ sudo apt install nfs-kernel-server</code></li>
+        <li>Vytvoříme složku v&nbsp;adresáři mounnt.
+            <code>$ sudo mkdir /mnt/sharedfolder</code></li>
+        <li>Nastavíme oprávnění pro sdílenou složku.
+            <code>$ sudo chmod 777 /mnt/sharedfolder</code></li>
+        <li>Nastavíme NFS export.
+            <code>$ sudo nano /etc/exports</code></li>
+        <li> Do souboru přidáme řádek s&nbsp;cestou složky, IP adresou podsítě a&nbsp;následujícími parametry.
+            <code>/mnt/sharedfolder IP/24(rw,sync,no_subtree_check)</code></li>
+        <li>Přes příkaz exportfs nasdílíme adresář.
+            <code>$ sudo exportfs -a</code></li>
+    </ol>
+
+
+    <h3>Instalace na klienta</h3>
+    <ol>
+        <li>Nainstalujeme balíček NFS common.
+            <code>$ sudo apt-get install nfs-common</code></li>
+        <li>Vytvoříme složku nebo použijeme stávající.
+            <code>$ sudo mkdir /mnt/sharedfolder_client</code></li>
+        <li>Složku připojíme k&nbsp;NFS serveru.
+            <code>$ sudo mount serverIP:/slozka_na_serveru /mnt/slozka_na_klientu</code></li>
+    </ol>
+
+    <a href="obr/NFS_client_server.png">
+        <img src="obr/NFS_client_server.png" alt="Výsledek praktické ukázky">
+    </a>
+    <p class="obrazek">Obr.&nbsp;1 - Výsledek praktické ukázky</p>
+
+    <div class="citace">
+        <a href="#dvanact">[12]</a>
+    </div>
+
+    <hr>
+    <h2 id="zaver">Závěr</h2>
+    <p>NFS je v&nbsp;unixových systémech velmi jednoduchý a&nbsp;intuitivní nástroj pro sdílení souboru po sítí. Velkým rizikem je však jeho napadnutelnost, takže se doporučuje provést bezpečnostní opatření. </p>
+
+    <hr>
+    <h2 id="zdroje">Zdroje</h2>
+    <ol>
+        <li id="jedna">
+            JONES, M. Network file systems and Linux. <i>IBM&nbsp;Developer</i> [online]. 2010-11-10 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://developer.ibm.com/tutorials/l-network-filesystems/">https://developer.ibm.com/tutorials/l-network-filesystems/</a>
+
+        <li id="dva">
+            Network File System (NFS). <i>ExtraHop</i> [online]. 2020-10-19 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://www.extrahop.com/resources/protocols/nfs/">https://www.extrahop.com/resources/protocols/nfs/</a>
+        </li>
+
+        <li id="tri">
+            NFS Client. <i>The Linux Kernel documentation</i> [online]. 2020-10-11 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://www.kernel.org/doc/html/latest/admin-guide/nfs/nfs-client.html">https://www.kernel.org/doc/html/latest/admin-guide/nfs/nfs-client.html</a>
+        </li>
+
+        <li id="ctyry">
+            NACHIMUTHU, Kalaiselvan. Difference between NFSv2, NFSv3 and NFS4 and advantage of NFSv4. <i>LINUX AND VMWARE STUFF</i> [online]. 2018-6-14 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://www.linvirtshell.com/2018/06/difference-between-nfsv2-nfsv3-and-nfs4.html">https://www.linvirtshell.com/2018/06/difference-between-nfsv2-nfsv3-and-nfs4.html</a>
+        </li>
+
+        <li id="pet">
+            SMITH, Christopher. Linux NFS faq. <i>Linux NFS faq</i> [online]. ca 2005 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="http://nfs.sourceforge.net/">http://nfs.sourceforge.net/</a>
+        </li>
+
+        <li id="sest">
+            Linux Network Administrator's Guide, 2nd Edition: Chapter&nbsp;14: The Network File System. KIRCH, Olaf a Terry DAWSON. <i>Linux Network Administrator's Guide</i> [online].2nd Edition. O'Reilly Media, 2000 [cit.&nbsp;2020-10-20]. ISBN&nbsp;1-56592-400-2.
+            URL:&nbsp;<a href="https://www.oreilly.com/openbook/linag2/book/ch14.html#X-087-2-NFS.KERNELV2">https://www.oreilly.com/openbook/linag2/book/ch14.html#X-087-2-NFS.KERNELV2/</a>
+        </li>
+
+        <li id="sedm">
+            ATWOOD, Jeff. Understanding User and Kernel Mode. <i>Coding Horror</i> [online]. 2008-1 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://blog.codinghorror.com/understanding-user-and-kernel-mode/">https://blog.codinghorror.com/understanding-user-and-kernel-mode/</a>
+        </li>
+
+        <li id="osm">
+            [Chapter 8] 8.14 Network File System (NFS). ZWICKY, Elizabeth D. a Brent CHAPMAN. <i>Building Internet Firewalls</i> [online]. O'Reilly Media, 1995 [cit.&nbsp;2020-10-20]. ISBN&nbsp;1-56592-124-0.
+            URL:&nbsp;<a href="https://www.cs.ait.ac.th/~on/O/oreilly/tcpip/firewall/ch08_14.htm">https://www.cs.ait.ac.th/~on/O/oreilly/tcpip/firewall/ch08_14.htm</a>
+        </li>
+
+        <li id="devet">
+            NOVECK, D. a C. LEVER. ORACLE. <i>RFC&nbsp;5661 - Network File System (NFS) Version&nbsp;4 Minor Version&nbsp;1 Protocol</i> [online]. 2020-8 [cit.&nbsp;2020-10-20]. ISSN&nbsp;2070-1721.
+            URL:&nbsp;<a href="https://tools.ietf.org/html/rfc8881">https://tools.ietf.org/html/rfc8881</a>
+        </li>
+
+        <li id="deset">
+            Exports(5) - Linux man page. <i>Die.net</i> [online]. ca 2000 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://linux.die.net/man/5/exports">https://linux.die.net/man/5/exports</a>
+        </li>
+
+        <li id="jedenact">
+            KIRCH, Olaf a Neil BROWN. Exportfs(8) - Linux man page. <i>Die.net</i> [online]. ca 2000 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://linux.die.net/man/8/exportfs">https://linux.die.net/man/8/exportfs</a>
+        </li>
+
+        <li id="dvanact">
+            BUZDAR, Karim. Install NFS Server and Client on Ubuntu. <i>VITUX - Linux Compendium</i> [online]. 2018-11-13 [cit.&nbsp;2020-10-20].
+            URL:&nbsp;<a href="https://vitux.com/install-nfs-server-and-client-on-ubuntu/">https://vitux.com/install-nfs-server-and-client-on-ubuntu/</a>
+        </li>
+    </ol>
+
+</div>
+</body>
+</html>
