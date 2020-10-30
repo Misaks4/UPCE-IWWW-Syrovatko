@@ -1,0 +1,101 @@
+header{
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #696969;
+    color: #ffffff;
+    display: flex;
+    font-size: 1.25em;
+}
+
+footer{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #696969;
+    color: #ffffff;
+    justify-content: space-around;
+    display: flex;
+    font-size: 1.2em;
+
+}
+
+a {
+    color: black;
+}
+
+a.menuA{
+    color: white;
+    padding: 10px 10px;
+}
+
+.menu{
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #696969;
+    color: #ffffff;
+    justify-content: space-around;
+    display: flex;
+    padding: 20px;
+
+    font-size: 1.75em;
+}
+
+.kontent{
+    margin-top: 20px;
+ max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+}
+img{
+    width: 100%;
+}
+
+.preview{
+    width: 230px;
+    padding: 6px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.fotogalerie{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: auto;
+
+    font-size: 1.10em;
+}
+
+input{
+    width: 50%;
+    box-sizing: content-box;
+}
+
+.formular{
+    margin: auto;
+    width: 400px;
+}
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+@media (max-width: 760px) {
+    .menu{
+        flex-direction: column;
+    }
+    a.menuA{
+        color: white;
+        padding: 2px 0px;
+    }
+    .preview{
+        width: auto;
+    }
+    .formular{
+        width: 100%;
+        margin-left: 10px;
+    }
+}
