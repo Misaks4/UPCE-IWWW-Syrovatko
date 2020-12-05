@@ -19,11 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a8cb802-f5a7-4b2a-8d76-aab22f03ff95" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/picture.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+    <list default="true" id="4a8cb802-f5a7-4b2a-8d76-aab22f03ff95" name="Default Changelist" comment="Ukol02">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +62,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604051734403</updated>
-      <workItem from="1604051735486" duration="20768000" />
+      <workItem from="1604051735486" duration="21551000" />
     </task>
+    <task id="LOCAL-00001" summary="Ukol02">
+      <created>1604093494306</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604093494306</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,11 +88,19 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ukol02" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ukol02" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604060439669">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/7.1080.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1604060439669" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1604094173449">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/7.1080.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1604094173449" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604091913210">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
