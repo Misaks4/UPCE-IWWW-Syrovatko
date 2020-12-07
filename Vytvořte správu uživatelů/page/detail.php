@@ -61,7 +61,7 @@ if ($_POST["action"]=="select"){
             </div>
             <div class="form">
                 <label for="frole">Role :</label><br>
-                <select id="fselect" name="fselect" form="formRegister">
+                <select id="fselect" name="fselect" form="formEdit">
                     <?php
                     echo '<option value="0"';
                     if ($selUser[0][3]==0){

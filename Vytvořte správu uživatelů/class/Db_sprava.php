@@ -49,7 +49,7 @@ class Db_sprava
 
     static function updateUser($id,$email, $pass, $role){
         $conn = Connection::getPdoInstance();
-        $stmt = $conn->prepare("UPDATE db_sprava.table_name SET email='$email' heslo='$pass' role='$role' WHERE id='$id'");
+        $stmt = $conn->prepare("UPDATE db_sprava.table_name SET email='$email', heslo='$pass', role='$role' WHERE id='$id'");
         $stmt->execute();
         return true;
     }

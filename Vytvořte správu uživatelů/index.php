@@ -33,7 +33,7 @@ if ($_POST["action"]=="login"){
 
 $user = Db_sprava::getUserInformation($_SESSION["loggedUserId"]);
 
-if (true){
+if (false){
     print_r($_SESSION);
     echo "<br>";
     print_r($_GET);
