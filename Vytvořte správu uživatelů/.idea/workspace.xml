@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dfcbf132-6d14-4381-8ed6-af3c5e920938" name="Default Changelist" comment="Ukol- Fix#1">
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/Napojte eshop na databázi.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/class/Connection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/class/DataTable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/class/Db_sprava.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/class/Katalog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/css/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/css/katalog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/header.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/page/cart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/page/detail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/page/logout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/page/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Napojte eshop na databázi/page/register.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
+    <include_path>
+      <path value="" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1lFiTfE4eFfhAZYAiWp4uvdkteF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
+    <property name="last_opened_file_path" value="C:/xampp/php/php.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Corona\Zima\IWWW\GitHub\Vytvořte správu uživatelů" />
+      <recent name="D:\Corona\Zima\IWWW\GitHub\Vytvořte správu uživatelů\Php" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="localhost" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$" port="8080">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dfcbf132-6d14-4381-8ed6-af3c5e920938" name="Default Changelist" comment="" />
+      <created>1607199248499</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607199248499</updated>
+      <workItem from="1607199249569" duration="1635000" />
+      <workItem from="1607202231923" duration="2646000" />
+      <workItem from="1607284503726" duration="512000" />
+      <workItem from="1607285153761" duration="357000" />
+      <workItem from="1607285643196" duration="15312000" />
+      <workItem from="1607343269549" duration="557000" />
+      <workItem from="1607345231586" duration="28882000" />
+      <workItem from="1607951702792" duration="1234000" />
+      <workItem from="1608069297936" duration="782000" />
+      <workItem from="1608198176959" duration="49000" />
+      <workItem from="1608290340168" duration="18000" />
+      <workItem from="1608290545117" duration="3200000" />
+      <workItem from="1608341813281" duration="612000" />
+    </task>
+    <task id="LOCAL-00001" summary="Ukol- Vytvořte správu uživatelů">
+      <created>1607380680503</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607380680503</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Ukol- Fix#1">
+      <created>1607382177591</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607382177591</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ukol- Vytvořte správu uživatelů" />
+    <MESSAGE value="Ukol- Fix#1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ukol- Fix#1" />
+  </component>
+</project>
